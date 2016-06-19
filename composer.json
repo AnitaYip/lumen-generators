@@ -1,5 +1,5 @@
 {
-    "name": "wn/lumen-generators",
+    "name": "RealPage/lumen-generators",
     "description": "A collection of generators for Lumen and Laravel 5.",
 	"keywords": ["lumen", "laravel", "rest", "api", "generators"],
     "license": "MIT",
@@ -17,7 +17,7 @@
     },
     "autoload": {
     	"psr-4": {
-    		"Wn\\Generators\\": "src/"
+    		"RealPage\\Generators\\": "src/"
     	}
     }
 }

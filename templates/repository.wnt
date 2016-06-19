@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Repositories\{{model}};
+
+use App\Models\{{model}}\{{model}};
+use RealPage\EnterpriseServices\Repositories\ApiRepositoryTrait;
+
+/**
+ * Class {{model}}Repository
+ *
+ * @package App\Repositories\{{model}}
+ */
+class {{model}}Repository implements {{model}}RepositoryInterface
+{
+    use ApiRepositoryTrait;
+
+    /**
+     * {{model}}Repository constructor.
+     * @param {{model}} ${{modelObj}}
+     */
+    public function __construct({{model}} ${{modelObj}})
+    {
+        $this->model = ${{modelObj}};
+    }
+}

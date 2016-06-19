@@ -1,6 +1,6 @@
-<?php namespace Wn\Generators\Template;
+<?php namespace RealPage\Generators\Template;
 
-use Wn\Generators\Template\TemplateLoader;
+use RealPage\Generators\Template\TemplateLoader;
 
 
 class Template {

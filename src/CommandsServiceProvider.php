@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators;
+<?php namespace RealPage\Generators;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -8,17 +8,10 @@ class CommandsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerModelCommand();
-        $this->registerControllerRestActionsCommand();
         $this->registerControllerCommand();
         $this->registerRouteCommand();
-        $this->registerMigrationCommand();
         $this->registerResourceCommand();
-        $this->registerResourcesCommand();
-        $this->registerPivotTableCommand();
-        $this->registerFactoryCommand();
-        $this->registerSeederCommand();
-        $this->registerPivotSeederCommand();
-        // $this->registerTestCommand();
+        $this->registerResourcesCommand();        
     }
 
     protected function registerModelCommand(){

@@ -1,8 +1,8 @@
-<?php namespace Wn\Generators\Template;
+<?php namespace RealPage\Generators\Template;
 
 use Illuminate\Filesystem\Filesystem;
-use Wn\Generators\Exceptions\TemplateException;
-use Wn\Generators\Template\Template;
+use RealPage\Generators\Exceptions\TemplateException;
+use RealPage\Generators\Template\Template;
 
 
 class TemplateLoader {

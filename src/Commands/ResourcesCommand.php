@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace RealPage\Generators\Commands;
 
 use Symfony\Component\Yaml\Yaml;
 

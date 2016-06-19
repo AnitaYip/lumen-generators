@@ -1,17 +1,23 @@
-<?php namespace {{namespace}};
+<?php
+
+namespace App\Models\{{name}};
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class {{name}} - Eloquent Model.
+ *
+ * @package App\Models\{{name}}
+ */
 class {{name}} extends Model
 {
-    protected $fillable = [{{fillable}}];
+    /**
+     * @var string
+     */
+    protected $table = '';
 
-    protected $dates = [{{dates}}];
-
-    public static $rules = [
-{{rules}}
-    ];
-
-{{relations}}
-
+    /**
+     * @var string
+     */
+    protected $primaryKey = '';
 }

@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators\Argument;
+<?php namespace RealPage\Generators\Argument;
 
 use Illuminate\Filesystem\Filesystem;
 use Wn\Generators\Argument\ArgumentFormat;

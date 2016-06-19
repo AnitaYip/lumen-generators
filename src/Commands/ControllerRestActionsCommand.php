@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace RealPage\Generators\Commands;
 
 
 class ControllerRestActionsCommand extends BaseCommand {

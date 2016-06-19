@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Repositories\{{model}};
+
+use App\Models\{{model}}\{{model}};
+use Illuminate\Database\Eloquent\Collection;
+
+/**
+ * Interface {{name}} - Defines CRUD operations on {{model}} entity.
+ *
+ * @package App\Repositories\{{model}}
+ */
+interface {{name}}
+{
+    /**
+     * Returns the Collection of all {{model}}s
+     *
+     * @return Collection
+     */
+    public function findAll() : Collection;
+
+    /**
+     * Returns the {{model}} entity based on the given id
+     *
+     * @param string $id
+     *
+     * @return {{model}}
+     */
+    public function findById(string $id);
+
+    /**
+     * Creates a {{model}}
+     *
+     * @param array $content
+     *
+     * @return {{model}}
+     */
+    public function create(array $content);
+
+    /**
+     * Updates {{model}} record for the given id.
+     *
+     * @param array  $content
+     * @param string $id
+     *
+     * @return {{model}}
+     */
+    public function update(array $content, string $id);
+
+    /**
+     * Deletes {{model}} record.
+     *
+     * @param string $id
+     *
+     * @return bool
+     */
+    public function delete(string $id) : bool;
+}

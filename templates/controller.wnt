@@ -1,9 +1,32 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-class {{name}} extends Controller
+namespace App\Http\Controllers\{{model}};
+
+use Laravel\Lumen\Routing\Controller as BaseController;
+use RealPage\EnterpriseServices\Controllers\ApiControllerTrait;
+use App\Models\{{model}}\{{model}};
+use App\Models\{{model}}\{{model}}Schema;
+use App\Repositories\{{model}}\{{model}}RepositoryInterface;
+
+/**
+ * Class {{name}} Handles the requests related to {{model}} entity
+ *
+ * @package App\Http\Controllers\{{model}}
+ */
+
+class {{name}} extends BaseController
 {
-    const MODEL = "{{model}}";
+    use ApiControllerTrait;
 
-    use RESTActions;
-
+    /**
+     * {{name}} constructor.
+     *
+     * @param {{model}}RepositoryInterface $repository
+     */
+    public function __construct({{model}}RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+        $this->schema = {{model}}Schema::class;
+        $this->encoder = $this->getEncoderInstance([ {{model}}::class => {{model}}Schema::class ]);
+    }
 }

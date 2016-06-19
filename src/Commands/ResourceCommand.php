@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace RealPage\Generators\Commands;
 
 
 class ResourceCommand extends BaseCommand {
@@ -40,19 +40,6 @@ class ResourceCommand extends BaseCommand {
             '--parsed' => true
         ]);
         
-        // generating the migration
-        $this->call('wn:migration', [
-            'table' => $tableName,
-            '--schema' => $this->schema(),
-            '--keys' => $this->migrationKeys(),
-            '--file' => $this->option('migration-file'),
-            '--parsed' => true
-        ]);
-        
-        // generating REST actions trait if doesn't exist
-        if(! $this->fs->exists('./app/Http/Controllers/RESTActions.php')){
-            $this->call('wn:controller:rest-actions');
-        }
         
         // generating the controller and routes
         $this->call('wn:controller', [
@@ -60,17 +47,6 @@ class ResourceCommand extends BaseCommand {
             '--no-routes' => false
         ]);
 
-        // generating model factory
-        $this->call('wn:factory', [
-            'model' => 'App\\' . $modelName,
-            '--fields' => $this->factoryFields(),
-            '--parsed' => true
-        ]);
-
-        // generating database seeder
-        $this->call('wn:seeder', [
-            'model' => 'App\\' . $modelName
-        ]);
 
     }
 

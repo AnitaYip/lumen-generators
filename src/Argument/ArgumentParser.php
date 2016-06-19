@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators\Argument;
+<?php namespace RealPage\Generators\Argument;
 
 use Wn\Generators\Argument\ArgumentFormat;
 use Wn\Generators\Exceptions\ArgumentParserException;

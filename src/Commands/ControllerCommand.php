@@ -1,4 +1,4 @@
-<?php namespace Wn\Generators\Commands;
+<?php namespace RealPage\Generators\Commands;
 
 
 class ControllerCommand extends BaseCommand {
@@ -7,7 +7,7 @@ class ControllerCommand extends BaseCommand {
         {model : Name of the model (with namespace if not App)}
 		{--no-routes= : without routes}';
 
-	protected $description = 'Generates RESTful controller using the RESTActions trait';
+	protected $description = 'Generates RESTful controller using the ApiController trait';
 
     public function handle()
     {

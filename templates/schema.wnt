@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Schemas\{{model}};
+
+use Neomerx\JsonApi\Schema\SchemaProvider;
+use RealPage\EnterpriseServices\Transformers\ApiTransformerTrait;
+
+class {{model}}Schema extends SchemaProvider
+{
+    use ApiTransformerTrait;
+
+    protected $resourceType = {{resource}};
+
+    /**
+     * @var array mapping between request payload attributes to DB model fields.
+     */
+    public static $mapping = [];
+
+    /**
+     * Get resource identity.
+     *
+     * @param object $resource
+     *
+     * @return string
+     */
+    public function getId($resource)
+    {
+        //TODO
+    }
+
+    /**
+     * Get resource attributes.
+     *
+     * @param object $resource
+     *
+     * @return array
+     */
+    public function getAttributes($resource)
+    {
+        return $this->transformResponseAttributes($resource, self::$mapping);
+    }
+
+    /**
+     * Transforms property type POST/PUT/PATCH request payload JSON attributes
+     * to DB model fields.
+     *
+     * @param array $attributes
+     *
+     * @return array of transformed attributes
+     */
+    public static function getRequestAttributes($attributes) : array
+    {
+        return self::transformRequestAttributes($attributes, self::$mapping);
+    }
+}
