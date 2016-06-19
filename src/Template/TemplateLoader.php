@@ -20,7 +20,7 @@ class TemplateLoader {
 	public function load($name)
 	{
 		if(! isset($this->loaded[$name])){
-			$path = __DIR__ . "/../../templates/{$name}.wnt";
+			$path = __DIR__ . "/../../templates/{$name}.rpt";
 			try {
 				$this->loaded[$name] = $this->fs->get($path);
 			} catch(\Exception $e) {

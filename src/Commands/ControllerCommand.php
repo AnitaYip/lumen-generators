@@ -3,41 +3,26 @@
 
 class ControllerCommand extends BaseCommand {
 
-	protected $signature = 'wn:controller
-        {model : Name of the model (with namespace if not App)}
-		{--no-routes= : without routes}';
+	protected $signature = 'rp:controller
+        {name : Name of the model}';
 
 	protected $description = 'Generates RESTful controller using the ApiController trait';
 
     public function handle()
     {
-    	$model = $this->argument('model');
-    	$name = '';
-    	if(strrpos($model, "\\") === false){
-    		$name = $model;
-    		$model = "App\\" . $model;
-    	} else {
-    		$name = explode("\\", $model);
-    		$name = $name[count($name) - 1];
-    	}
-        $controller = ucwords(str_plural($name)) . 'Controller';
+    	$name = ucwords(camel_case($this->argument('name')));
+
+        $controller = $name . 'Controller';
         $content = $this->getTemplate('controller')
         	->with([
-        		'name' => $controller,
-        		'model' => $model
+        		'model' => $name
         	])
         	->get();
 
-        $this->save($content, "./app/Http/Controllers/{$controller}.php");
+        $this->save($content, "./app/Http/Controllers/{$name}/{$controller}.php");
 
         $this->info("{$controller} generated !");
 
-        if(! $this->option('no-routes')){
-            $this->call('wn:route', [
-                'resource' => snake_case($name, '-'),
-                '--controller' => $controller
-            ]);
-        }
     }
-    
+
 }

@@ -9,17 +9,17 @@ use App\Models\{{model}}\{{model}}Schema;
 use App\Repositories\{{model}}\{{model}}RepositoryInterface;
 
 /**
- * Class {{name}} Handles the requests related to {{model}} entity
+ * Class {{model}}Controller Handles the requests related to {{model}} entity
  *
  * @package App\Http\Controllers\{{model}}
  */
 
-class {{name}} extends BaseController
+class {{model}}Controller extends BaseController
 {
     use ApiControllerTrait;
 
     /**
-     * {{name}} constructor.
+     * {{model}}Controller constructor.
      *
      * @param {{model}}RepositoryInterface $repository
      */

@@ -3,37 +3,26 @@
 
 class RouteCommand extends BaseCommand {
 
-	protected $signature = 'wn:route
-		{resource : Name of the resource.}
-        {--controller= : Name of the RESTful controller.}';
+	protected $signature = 'rp:route
+		{name : Name of the resource/model.}';
 
 	protected $description = 'Generates RESTful routes.';
 
     public function handle()
     {
-        $resource = $this->argument('resource');
+        $name = ucwords(camel_case($this->argument('name')));
 
-        $content = $this->fs->get('./app/Http/routes.php');
-
-        $content .= PHP_EOL . $this->getTemplate('routes')
+        $content = $this->getTemplate('routes')
             ->with([
-                'resource' => $resource,
-                'controller' => $this->getController()
+                'model' => $name,
+                'resource' => strtolower($name),
+                'controller' => $name . 'Controller'
             ])
             ->get();
 
-        $this->save($content, './app/Http/routes.php');
+        $this->save($content, "./app/Http/Routes/{$name}Routes.php");
 
-        $this->info("{$resource} routes generated !");
-    }
-
-    protected function getController()
-    {
-        $controller = $this->option('controller');
-        if(! $controller){
-            $controller = ucwords(camel_case($this->argument('resource'))) . 'Controller';
-        }
-        return $controller;
+        $this->info("{$name}Routes generated !");
     }
 
 }

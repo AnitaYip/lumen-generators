@@ -11,91 +11,63 @@ class CommandsServiceProvider extends ServiceProvider
         $this->registerControllerCommand();
         $this->registerRouteCommand();
         $this->registerResourceCommand();
-        $this->registerResourcesCommand();        
+        $this->registerRepositoryInterfaceCommand();
+        $this->registerRepositoryCommand();
+        $this->registerSchemaCommand();
     }
 
     protected function registerModelCommand(){
-        $this->app->singleton('command.wn.model', function($app){
-            return $app['Wn\Generators\Commands\ModelCommand'];
+        $this->app->singleton('command.rp.model', function($app){
+            return $app['RealPage\Generators\Commands\ModelCommand'];
         });
-        $this->commands('command.wn.model');
-    }
-
-    protected function registerControllerRestActionsCommand(){
-        $this->app->singleton('command.wn.controller.rest-actions', function($app){
-            return $app['Wn\Generators\Commands\ControllerRestActionsCommand'];
-        });
-        $this->commands('command.wn.controller.rest-actions');
+        $this->commands('command.rp.model');
     }
 
     protected function registerControllerCommand(){
-        $this->app->singleton('command.wn.controller', function($app){
-            return $app['Wn\Generators\Commands\ControllerCommand'];
+        $this->app->singleton('command.rp.controller', function($app){
+            return $app['RealPage\Generators\Commands\ControllerCommand'];
         });
-        $this->commands('command.wn.controller');
-    }
-
-    protected function registerMigrationCommand(){
-        $this->app->singleton('command.wn.migration', function($app){
-            return $app['Wn\Generators\Commands\MigrationCommand'];
-        });
-        $this->commands('command.wn.migration');
+        $this->commands('command.rp.controller');
     }
 
     protected function registerRouteCommand(){
-        $this->app->singleton('command.wn.route', function($app){
-            return $app['Wn\Generators\Commands\RouteCommand'];
+        $this->app->singleton('command.rp.route', function($app){
+            return $app['RealPage\Generators\Commands\RouteCommand'];
         });
-        $this->commands('command.wn.route');
-    }
-
-    protected function registerTestCommand(){
-        $this->app->singleton('command.wn.test', function($app){
-            return $app['Wn\Generators\Commands\TestCommand'];
-        });
-        $this->commands('command.wn.test');
+        $this->commands('command.rp.route');
     }
 
     protected function registerResourceCommand(){
-        $this->app->singleton('command.wn.resource', function($app){
-            return $app['Wn\Generators\Commands\ResourceCommand'];
+        $this->app->singleton('command.rp.resource', function($app){
+            return $app['RealPage\Generators\Commands\ResourceCommand'];
         });
-        $this->commands('command.wn.resource');
+        $this->commands('command.rp.resource');
     }
 
-    protected function registerResourcesCommand(){
-        $this->app->singleton('command.wn.resources', function($app){
-            return $app['Wn\Generators\Commands\ResourcesCommand'];
+    protected function registerRepositoryInterfaceCommand(){
+        $this->app->singleton('command.rp.repositoryinterface', function($app){
+            return $app['RealPage\Generators\Commands\RepositoryInterface'];
         });
-        $this->commands('command.wn.resources');
+        $this->commands('command.rp.repositoryinterface');
     }
 
-    protected function registerPivotTableCommand(){
-        $this->app->singleton('command.wn.pivot-table', function($app){
-            return $app['Wn\Generators\Commands\PivotTableCommand'];
+    protected function registerRepositoryCommand(){
+        $this->app->singleton('command.rp.repository', function($app){
+            return $app['RealPage\Generators\Commands\RepositoryCommand'];
         });
-        $this->commands('command.wn.pivot-table');
+        $this->commands('command.rp.repository');
     }
 
-    protected function registerFactoryCommand(){
-        $this->app->singleton('command.wn.factory', function($app){
-            return $app['Wn\Generators\Commands\FactoryCommand'];
+    protected function registerSchemaCommand(){
+        $this->app->singleton('command.rp.schema', function($app){
+            return $app['RealPage\Generators\Commands\SchemaCommand'];
         });
-        $this->commands('command.wn.factory');
+        $this->commands('command.rp.schema');
     }
-
-    protected function registerSeederCommand(){
-        $this->app->singleton('command.wn.seeder', function($app){
-            return $app['Wn\Generators\Commands\SeederCommand'];
+    protected function registerValidatorCommand(){
+        $this->app->singleton('command.rp.validator', function($app){
+            return $app['RealPage\Generators\Commands\ValidatorCommand'];
         });
-        $this->commands('command.wn.seeder');
+        $this->commands('command.rp.validator');
     }
-
-    protected function registerPivotSeederCommand(){
-        $this->app->singleton('command.wn.pivot.seeder', function($app){
-            return $app['Wn\Generators\Commands\PivotSeederCommand'];
-        });
-        $this->commands('command.wn.pivot.seeder');
-    }
-
 }

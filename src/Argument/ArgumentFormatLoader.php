@@ -1,8 +1,8 @@
 <?php namespace RealPage\Generators\Argument;
 
 use Illuminate\Filesystem\Filesystem;
-use Wn\Generators\Argument\ArgumentFormat;
-use Wn\Generators\Exceptions\ArgumentFormatException;
+use RealPage\Generators\Argument\ArgumentFormat;
+use RealPage\Generators\Exceptions\ArgumentFormatException;
 
 
 class ArgumentFormatLoader {

@@ -1,7 +1,7 @@
 <?php namespace RealPage\Generators\Argument;
 
-use Wn\Generators\Argument\ArgumentFormat;
-use Wn\Generators\Exceptions\ArgumentParserException;
+use RealPage\Generators\Argument\ArgumentFormat;
+use RealPage\Generators\Exceptions\ArgumentParserException;
 
 
 class ArgumentParser {

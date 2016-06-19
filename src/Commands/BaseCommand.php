@@ -2,9 +2,9 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Wn\Generators\Argument\ArgumentFormatLoader;
-use Wn\Generators\Argument\ArgumentParser;
-use Wn\Generators\Template\TemplateLoader;
+use RealPage\Generators\Argument\ArgumentFormatLoader;
+use RealPage\Generators\Argument\ArgumentParser;
+use RealPage\Generators\Template\TemplateLoader;
 
 
 class BaseCommand extends Command {

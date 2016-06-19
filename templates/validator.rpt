@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Http\Middleware\Validators\{{model}};
+
+use RealPage\EnterpriseServices\Validators\ApiValidator;
+
+/**
+ * Class {{model}}Validator Validates {{model}} entity
+ *
+ * @package App\Http\Middleware\Validators\{{model}}
+ */
+class {{model}}Validator extends ApiValidator
+{
+    /**
+     * Validation rules to be applied on the request payload for POST/PUT/PATCH requests.
+     *
+     * @param string $method Http Request Method
+     *
+     * @return array of rules
+     */
+    public function rules(string $method) : array
+    {
+        $baseRules = [
+            'data.type' => 'in:{{modelObj}}'
+        ];
+        $rules = [];
+        switch ($method) {
+            case 'POST':
+                $rules = [];
+                break;
+            case 'PUT':
+                $rules =  [];
+                break;
+            case 'PATCH':
+                $rules =  [];
+                break;
+            default:
+                return [];
+        }
+        return array_merge($baseRules, $rules);
+    }
+}
