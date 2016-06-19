@@ -16,6 +16,8 @@ class CommandsServiceProvider extends ServiceProvider
         $this->registerSchemaCommand();
         $this->registerValidatorCommand();
 
+        $this->registerCleanResourceCommand();
+
     }
 
     protected function registerModelCommand(){
