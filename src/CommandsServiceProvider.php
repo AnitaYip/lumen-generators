@@ -14,6 +14,7 @@ class CommandsServiceProvider extends ServiceProvider
         $this->registerRepositoryInterfaceCommand();
         $this->registerRepositoryCommand();
         $this->registerSchemaCommand();
+
     }
 
     protected function registerModelCommand(){
@@ -64,10 +65,18 @@ class CommandsServiceProvider extends ServiceProvider
         });
         $this->commands('command.rp.schema');
     }
+
     protected function registerValidatorCommand(){
         $this->app->singleton('command.rp.validator', function($app){
             return $app['RealPage\Generators\Commands\ValidatorCommand'];
         });
         $this->commands('command.rp.validator');
+    }
+
+    protected function registerCleanResourceCommand(){
+        $this->app->singleton('command.rp.clean-skeleton', function($app){
+            return $app['RealPage\Generators\Commands\CleanResourceSkeletonCommand'];
+        });
+        $this->commands('command.rp.clean-skeleton');
     }
 }

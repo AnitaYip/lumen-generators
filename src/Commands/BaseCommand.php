@@ -2,33 +2,25 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use RealPage\Generators\Argument\ArgumentFormatLoader;
-use RealPage\Generators\Argument\ArgumentParser;
 use RealPage\Generators\Template\TemplateLoader;
 
 
 class BaseCommand extends Command {
-    
+
     protected $fs;
 	protected $templates;
 
 	public function __construct(Filesystem $fs)
 	{
         parent::__construct();
-        
+
         $this->fs = $fs;
         $this->templates = new TemplateLoader($fs);
-        $this->argumentFormatLoader = new ArgumentFormatLoader($fs);
     }
 
     protected function getTemplate($name)
     {
         return $this->templates->load($name);
-    }
-
-    protected function getArgumentParser($name){
-        $format = $this->argumentFormatLoader->load($name);
-        return new ArgumentParser($format);
     }
 
     protected function save($content, $path)
