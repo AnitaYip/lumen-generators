@@ -7,14 +7,14 @@ use App\Http\Controllers\{{model}}\{{controller}};
 $app->group(['prefix' => {{resource}}], function ($app) {
     $app->get('/', {{controller}}::class . '@index');
     $app->get('/{id:[\d]+}', {{controller}}::class . '@find');
-    $app->post('/', ['middleware' => 'validator.{{validator}}', 'uses' => {{controller}}::class . '@create']);
+    $app->post('/', ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@create']);
     $app->put(
         '/{id:[\d]+}',
-        ['middleware' => 'validator.{{validator}}', 'uses' => {{controller}}::class . '@update']
+        ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@update']
     );
     $app->patch(
         '/{id:[\d]+}',
-        ['middleware' => 'validator.{{validator}}', 'uses' => {{controller}}::class . '@patch']
+        ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@patch']
     );
     $app->delete('/{id:[\d]+}', {{controller}}::class . '@delete');
 });
