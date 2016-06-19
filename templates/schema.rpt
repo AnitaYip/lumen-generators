@@ -9,7 +9,7 @@ class {{model}}Schema extends SchemaProvider
 {
     use ApiTransformerTrait;
 
-    protected $resourceType = {{resource}};
+    protected $resourceType = '{{resource}}';
 
     /**
      * @var array mapping between request payload attributes to DB model fields.
