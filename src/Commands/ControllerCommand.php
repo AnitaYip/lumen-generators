@@ -12,17 +12,14 @@ class ControllerCommand extends BaseCommand {
     {
     	$name = ucwords(camel_case($this->argument('name')));
 
-        $controller = $name . 'Controller';
         $content = $this->getTemplate('controller')
         	->with([
         		'model' => $name
         	])
         	->get();
 
-        $this->save($content, "./app/Http/Controllers/{$name}/{$controller}.php");
+        $this->save($content, "./app/Http/Controllers/{$name}/{$name}Controller.php");
 
-        $this->info("{$controller} generated !");
-
+        $this->info("{$name}Controller generated !");
     }
-
 }

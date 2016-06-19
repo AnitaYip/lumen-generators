@@ -14,6 +14,7 @@ class CommandsServiceProvider extends ServiceProvider
         $this->registerRepositoryInterfaceCommand();
         $this->registerRepositoryCommand();
         $this->registerSchemaCommand();
+        $this->registerValidatorCommand();
 
     }
 
@@ -47,7 +48,7 @@ class CommandsServiceProvider extends ServiceProvider
 
     protected function registerRepositoryInterfaceCommand(){
         $this->app->singleton('command.rp.repositoryinterface', function($app){
-            return $app['RealPage\Generators\Commands\RepositoryInterface'];
+            return $app['RealPage\Generators\Commands\RepositoryInterfaceCommand'];
         });
         $this->commands('command.rp.repositoryinterface');
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\{{model}};
 use Laravel\Lumen\Routing\Controller as BaseController;
 use RealPage\EnterpriseServices\Controllers\ApiControllerTrait;
 use App\Models\{{model}}\{{model}};
-use App\Models\{{model}}\{{model}}Schema;
+use App\Schemas\{{model}}\{{model}}Schema;
 use App\Repositories\{{model}}\{{model}}RepositoryInterface;
 
 /**

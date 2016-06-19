@@ -6,11 +6,11 @@ use App\Models\{{model}}\{{model}};
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Interface {{name}} - Defines CRUD operations on {{model}} entity.
+ * Interface {{model}}RepositoryInterface - Defines CRUD operations on {{model}} entity.
  *
  * @package App\Repositories\{{model}}
  */
-interface {{name}}
+interface {{model}}RepositoryInterface
 {
     /**
      * Returns the Collection of all {{model}}s

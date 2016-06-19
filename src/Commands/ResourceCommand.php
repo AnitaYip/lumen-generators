@@ -13,12 +13,12 @@ class ResourceCommand extends BaseCommand {
 
     private $commands = [
         'rp:model',
-        'rp.controller',
-        'rp.repointf',
-        'rp.repo',
-        'rp.schema',
-        'rp.validator',
-        'rp.route'
+        'rp:controller',
+        'rp:repointf',
+        'rp:repo',
+        'rp:schema',
+        'rp:validator',
+        'rp:route'
     ];
 
     public function handle()
