@@ -54,6 +54,7 @@ Once the skeleton is in place, create/update the below files to continue with th
 
 - Add the app/Http/Routes/<Entity>Routes.php to app/Http/routes.php file
 - Bind the RepositoryInterface to Repository class in AppServiceProvider
+- Add the validator.<resourceentity> to routeMiddleware section of bootstrap/app.php
 - Create the migrate and a seeder if required
 - Create unit tests
 - Add api documentation using ApiBlueprint
