@@ -4,7 +4,7 @@
  */
 use App\Http\Controllers\{{model}}\{{controller}};
 
-$app->group(['prefix' => {{resource}}], function ($app) {
+$app->group(['prefix' => '{{resource}}'], function ($app) {
     $app->get('/', {{controller}}::class . '@index');
     $app->get('/{id:[\d]+}', {{controller}}::class . '@find');
     $app->post('/', ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@create']);
