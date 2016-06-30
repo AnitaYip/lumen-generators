@@ -65,6 +65,7 @@ class CleanResourceSkeletonCommand extends BaseCommand
         if ($repointf || $repo) {
             $filesTobeDeleted[] = "./app/Repositories/{$resource}/{$resource}RepositoryInterface.php";
             $filesTobeDeleted[] = "./app/Repositories/{$resource}/{$resource}Repository.php";
+            $dirsTobeDeleted[] = "./app/Repositories/{$resource}";
         }
         if ($validator) {
             $filesTobeDeleted[] = "./app/Http/Middleware/Validators/{$resource}/{$resource}Validator.php";
