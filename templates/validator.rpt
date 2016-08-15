@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\Validators\{{model}};
 
 use RealPage\EnterpriseServices\Validators\ApiValidator;
+use Illuminate\Http\Request;
 
 /**
  * Class {{model}}Validator Validates {{model}} entity
@@ -14,17 +15,17 @@ class {{model}}Validator extends ApiValidator
     /**
      * Validation rules to be applied on the request payload for POST/PUT/PATCH requests.
      *
-     * @param string $method Http Request Method
+     * @param Request $request Http Request
      *
      * @return array of rules
      */
-    public function rules(string $method) : array
+    public function rules(Request $request) : array
     {
         $baseRules = [
             'data.type' => 'in:{{modelObj}}'
         ];
         $rules = [];
-        switch ($method) {
+        switch ($request->getMethod()) {
             case 'POST':
                 $rules = [];
                 break;
