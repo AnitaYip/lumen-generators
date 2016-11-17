@@ -29,6 +29,17 @@ interface {{model}}RepositoryInterface
     public function findById(string $id);
 
     /**
+     * Returns Collection of {{model}} entities based on the given criteria
+     *
+     * @param array $criteria
+     * @param array $relations
+     * @param $limit
+     *
+     * @return Collection
+     */
+    public function findByCriteria(array $criteria, array $relations = null, $limit = null);
+
+    /**
      * Creates a {{model}}
      *
      * @param array $content
