@@ -37,7 +37,7 @@ class {{model}}Schema extends SchemaProvider
      */
     public function getAttributes($resource)
     {
-        return $this->transformResponseAttributes($resource, self::$mapping);
+        return $this->transformResponse($resource, self::$mapping);
     }
 
     /**
@@ -50,6 +50,6 @@ class {{model}}Schema extends SchemaProvider
      */
     public static function getRequestAttributes($attributes) : array
     {
-        return self::transformRequestAttributes($attributes, self::$mapping);
+        return self::transformRequest($attributes, self::$mapping);
     }
 }
