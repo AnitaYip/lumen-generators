@@ -3,17 +3,15 @@
 namespace App\Repositories\{{model}};
 
 use App\Models\{{model}}\{{model}};
-use RealPage\EnterpriseServices\Repositories\ApiRepositoryTrait;
+use RealPage\EnterpriseServices\Repositories\BaseApiRepository;
 
 /**
  * Class {{model}}Repository
  *
  * @package App\Repositories\{{model}}
  */
-class {{model}}Repository implements {{model}}RepositoryInterface
+class {{model}}Repository extends BaseApiRepository
 {
-    use ApiRepositoryTrait;
-
     /**
      * {{model}}Repository constructor.
      * @param {{model}} ${{modelObj}}

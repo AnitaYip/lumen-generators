@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\{{model}};
 
-use Laravel\Lumen\Routing\Controller as BaseController;
-use RealPage\EnterpriseServices\Controllers\ApiControllerTrait;
+use App\Http\Controllers\Controller;
 use App\Models\{{model}}\{{model}};
 use App\Schemas\{{model}}\{{model}}Schema;
-use App\Repositories\{{model}}\{{model}}RepositoryInterface;
+use App\Repositories\{{model}}\{{model}}Repository;
 
 /**
  * Class {{model}}Controller Handles the requests related to {{model}} entity
@@ -14,16 +13,14 @@ use App\Repositories\{{model}}\{{model}}RepositoryInterface;
  * @package App\Http\Controllers\{{model}}
  */
 
-class {{model}}Controller extends BaseController
+class {{model}}Controller extends Controller
 {
-    use ApiControllerTrait;
-
     /**
      * {{model}}Controller constructor.
      *
      * @param {{model}}RepositoryInterface $repository
      */
-    public function __construct({{model}}RepositoryInterface $repository)
+    public function __construct({{model}}Repository $repository)
     {
         $this->repository = $repository;
         $this->schema = {{model}}Schema::class;
