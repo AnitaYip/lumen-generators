@@ -24,6 +24,9 @@ class {{model}}Controller extends Controller
     {
         $this->repository = $repository;
         $this->schema = {{model}}Schema::class;
-        $this->encoder = $this->getEncoderInstance([ {{model}}::class => {{model}}Schema::class ]);
+        $this->modelSchemas = [
+            {{model}}::class => {{model}}Schema::class
+        ];
+        $this->encoder = $this->getEncoderInstance($this->modelSchemas);
     }
 }
