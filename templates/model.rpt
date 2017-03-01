@@ -2,14 +2,14 @@
 
 namespace App\Models\{{name}};
 
-use Illuminate\Database\Eloquent\Model;
+use RealPage\Lumen\database\Eloquent\Model\AbstractBaseModel;
 
 /**
  * Class {{name}} - Eloquent Model.
  *
  * @package App\Models\{{name}}
  */
-class {{name}} extends Model
+class {{name}} extends AbstractBaseModel
 {
     /**
      * @var string
