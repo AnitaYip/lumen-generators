@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware\Validators\{{model}};
 
-use RealPage\EnterpriseServices\Validators\ApiValidator;
+use RealPage\EnterpriseServices\Validators\AbstractApiValidator;
 use Illuminate\Http\Request;
 
 /**
@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
  *
  * @package App\Http\Middleware\Validators\{{model}}
  */
-class {{model}}Validator extends ApiValidator
+class {{model}}Validator extends AbstractApiValidator
 {
     /**
-     * Validation rules to be applied on the request payload for POST/PUT/PATCH requests.
+     * Validation rules to be applied on the request payload for POST/PUT/PATCH requests and request params for GET/HEAD.
      *
      * @param Request $request Http Request
      *
