@@ -45,11 +45,12 @@ class {{model}}Schema extends SchemaProvider
      * to DB model fields.
      *
      * @param array $attributes
+     * @param array $nullableColumns
      *
      * @return array of transformed attributes
      */
-    public static function getRequestAttributes($attributes) : array
+    public static function getRequestAttributes($attributes, array $nullableColumns = []) : array
     {
-        return self::transformRequest($attributes, self::$mapping);
+        return self::transformRequest($attributes, self::$mapping, $nullableColumns);
     }
 }
