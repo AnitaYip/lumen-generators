@@ -51,6 +51,6 @@ class {{model}}Schema extends SchemaProvider
      */
     public static function getRequestAttributes($attributes, array $nullableColumns = []) : array
     {
-        return self::transformRequest($attributes, self::$mapping, $nullableColumns);
+        return self::transformRequest($attributes, self::$mapping, [], $nullableColumns);
     }
 }
