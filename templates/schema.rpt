@@ -16,6 +16,8 @@ class {{model}}Schema extends SchemaProvider
      */
     public static $mapping = [];
 
+    public static $includedRelations = [];
+
     /**
      * Get resource identity.
      *
