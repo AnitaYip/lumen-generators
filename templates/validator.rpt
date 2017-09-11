@@ -27,14 +27,24 @@ class {{model}}Validator extends AbstractApiValidator
         $rules = [];
         switch ($request->getMethod()) {
             case 'POST':
-                $rules = [];
+                $rules = [
+                    parent::ATTRIBUTE_ACCESSOR_PREFIX.'createdBy' => 'required|string',
+                ];
                 break;
             case 'PUT':
-                $rules =  [];
+                $rules =  [
+                    parent::ATTRIBUTE_ACCESSOR_PREFIX.'modifiedBy' => 'required|string',
+                ];
                 break;
             case 'PATCH':
-                $rules =  [];
+                $rules =  [
+                    parent::ATTRIBUTE_ACCESSOR_PREFIX.'modifiedBy' => 'required|string',
+                ];
                 break;
+            case 'DELETE':
+                return [
+                    'modifiedBy' => 'required|string'
+                ];
             default:
                 return [];
         }
