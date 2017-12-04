@@ -6,15 +6,15 @@ use App\Http\Controllers\{{model}}\{{controller}};
 
 $app->group(['prefix' => '{{resource}}'], function ($app) {
     $app->get('/', {{controller}}::class . '@index');
-    $app->get('/{id:[\d]+}', {{controller}}::class . '@find');
+    $app->get('/{id}', {{controller}}::class . '@find');
     $app->post('/', ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@create']);
     $app->put(
-        '/{id:[\d]+}',
+        '/{id}',
         ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@update']
     );
     $app->patch(
-        '/{id:[\d]+}',
+        '/{id}',
         ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@patch']
     );
-    $app->delete('/{id:[\d]+}', {{controller}}::class . '@delete');
+    $app->delete('/{id}', {{controller}}::class . '@delete');
 });
