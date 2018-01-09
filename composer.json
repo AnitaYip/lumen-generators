@@ -3,7 +3,7 @@
     "description": "A collection of generators for Lumen and Laravel 5.",
 	"keywords": ["lumen", "laravel", "rest", "api", "generators"],
     "require": {
-    	"php": "~7.0",
+    	"php": "~7.1",
         "illuminate/console": "^5.1",
         "illuminate/filesystem": "^5.1"
     },
