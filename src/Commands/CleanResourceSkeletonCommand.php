@@ -12,7 +12,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class CleanResourceSkeletonCommand extends BaseCommand
 {
-    protected $signature = 'rp:clean-skeleton {name : Name of the model} {--f|force}';
+    protected $name = 'rp:clean-skeleton';
     /**
      * The console command description.
      *
@@ -26,15 +26,12 @@ class CleanResourceSkeletonCommand extends BaseCommand
      */
     public function handle()
     {
-        $resource = ucwords(camel_case($this->argument('name')));
+        $args = parent::handle();
+        $name = $args['name'];
+        $dir = $args['dir'];
+
         if ($this->option('force')) {
-            $controller = true;
-            $model = true;
-            $schema = true;
-            $repointf = true;
-            $repo = true;
-            $validator = true;
-            $route = true;
+            $controller = $model = $schema = $repointf = $repo = $validator = $route = true;
         } else {
             $controller = $this->confirm('Remove Controller?', true);
             $model = $this->confirm('Remove example Model?', true);
@@ -44,35 +41,37 @@ class CleanResourceSkeletonCommand extends BaseCommand
                 true
             );
             $validator = $this->confirm('Remove Validator?', true);
-            $route = $this->confirm('Remove example route?', true);
+            $route = $this->confirm('Remove Route?', true);
         }
 
         $filesTobeDeleted = [];
         $dirsTobeDeleted = [];
 
+        $path = parent::buildPath($args);
+
         if ($controller) {
-            $filesTobeDeleted[] = "./app/Http/Controllers/{$resource}/{$resource}Controller.php";
-            $dirsTobeDeleted[] =  "./app/Http/Controllers/{$resource}";
+            $filesTobeDeleted[] = $path . "/src/Http/Controllers/{$dir}/{$name}Controller.php";
+            $dirsTobeDeleted[] =  $path . "/src/Http/Controllers/{$dir}";
         }
         if ($model) {
-            $filesTobeDeleted[] = "./app/Models/{$resource}/{$resource}.php";
-            $dirsTobeDeleted[] = "./app/Models/{$resource}";
+            $filesTobeDeleted[] = $path . "/src/Models/{$dir}/{$name}.php";
+            $dirsTobeDeleted[] = $path . "/src/Models/{$dir}";
         }
         if ($schema) {
-            $filesTobeDeleted[] = "./app/Schemas/{$resource}/{$resource}Schema.php";
-            $dirsTobeDeleted[] = "./app/Schemas/{$resource}";
+            $filesTobeDeleted[] = $path . "/src/Schemas/{$dir}/{$name}Schema.php";
+            $dirsTobeDeleted[] = $path . "/src/Schemas/{$dir}";
         }
         if ($repointf || $repo) {
-            $filesTobeDeleted[] = "./app/Repositories/{$resource}/{$resource}RepositoryInterface.php";
-            $filesTobeDeleted[] = "./app/Repositories/{$resource}/{$resource}Repository.php";
-            $dirsTobeDeleted[] = "./app/Repositories/{$resource}";
+            $filesTobeDeleted[] = $path . "/src/Repositories/{$dir}/{$name}RepositoryInterface.php";
+            $filesTobeDeleted[] = $path . "/src/Repositories/{$dir}/{$name}Repository.php";
+            $dirsTobeDeleted[] = $path . "/src/Repositories/{$dir}";
         }
         if ($validator) {
-            $filesTobeDeleted[] = "./app/Http/Middleware/Validators/{$resource}/{$resource}Validator.php";
-            $dirsTobeDeleted[] = "./app/Http/Middleware/Validators/{$resource}";
+            $filesTobeDeleted[] = $path . "/src/Http/Middleware/Validators/{$dir}/{$name}Validator.php";
+            $dirsTobeDeleted[] = $path . "/src/Http/Middleware/Validators/{$dir}";
         }
         if ($route) {
-            $filesTobeDeleted[] = "./app/Http/Routes/{$resource}Routes.php";
+            $filesTobeDeleted[] = $path . "/src/Http/Routes/{$name}Routes.php";
         }
 
         foreach ($filesTobeDeleted as $file) {

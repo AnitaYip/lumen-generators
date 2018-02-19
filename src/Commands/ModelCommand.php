@@ -3,20 +3,14 @@
 
 class ModelCommand extends BaseCommand {
 
-	protected $signature = 'rp:model {name : Name of the model.}';
+	protected $name = 'rp:model';
 
 	protected $description = 'Generates a model class for a RESTful resource';
 
     public function handle()
     {
-        $name = ucwords(camel_case($this->argument('name')));
+        $args = parent::handle();
 
-        $content = $this->getTemplate('model')
-            ->with(['name' => $name])
-            ->get();
-
-        $this->save($content, "app/Models/{$name}/{$name}.php");
-
-        $this->info("{$name} model generated !");
+        parent::writeToTemplate('model', $args, '/src/Models', '');
     }
 }

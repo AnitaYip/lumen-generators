@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\{{model}};
+namespace App\Http\Controllers\{{dir}};
 
 use App\Http\Controllers\Controller;
-use App\Models\{{model}}\{{model}};
-use App\Schemas\{{model}}\{{model}}Schema;
-use App\Repositories\{{model}}\{{model}}Repository;
+use App\Models\{{dir}}\{{model}};
+use App\Schemas\{{dir}}\{{model}}Schema;
+use App\Repositories\{{dir}}\{{model}}Repository;
 
 /**
  * Class {{model}}Controller Handles the requests related to {{model}} entity
  *
- * @package App\Http\Controllers\{{model}}
+ * @package App\Http\Controllers\{{dir}}
  */
 
 class {{model}}Controller extends Controller
@@ -24,9 +24,6 @@ class {{model}}Controller extends Controller
     {
         $this->repository = $repository;
         $this->schema = {{model}}Schema::class;
-        $this->modelSchemas = [
-            {{model}}::class => {{model}}Schema::class
-        ];
-        $this->encoder = $this->getEncoderInstance($this->modelSchemas);
+        parent::__construct();
     }
 }

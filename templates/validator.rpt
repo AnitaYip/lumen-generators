@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware\Validators\{{model}};
+namespace App\Http\Middleware\Validators\{{dir}};
 
 use RealPage\EnterpriseServices\Validators\AbstractApiValidator;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 /**
  * Class {{model}}Validator Validates {{model}} entity
  *
- * @package App\Http\Middleware\Validators\{{model}}
+ * @package App\Http\Middleware\Validators\{{dir}}
  */
 class {{model}}Validator extends AbstractApiValidator
 {
@@ -22,7 +22,7 @@ class {{model}}Validator extends AbstractApiValidator
     public function rules(Request $request) : array
     {
         $baseRules = [
-            'data.type' => 'in:{{modelObj}}'
+            'data.type' => 'in:{{resource}}'
         ];
         $rules = [];
         switch ($request->getMethod()) {

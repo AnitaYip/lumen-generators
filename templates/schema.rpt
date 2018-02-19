@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Schemas\{{model}};
+namespace App\Schemas\{{dir}};
 
 use Neomerx\JsonApi\Schema\SchemaProvider;
 use RealPage\EnterpriseServices\Transformers\ApiTransformerTrait;
@@ -40,19 +40,5 @@ class {{model}}Schema extends SchemaProvider
     public function getAttributes($resource)
     {
         return $this->transformResponse($resource, self::$mapping);
-    }
-
-    /**
-     * Transforms property type POST/PUT/PATCH request payload JSON attributes
-     * to DB model fields.
-     *
-     * @param array $attributes
-     * @param array $nullableColumns
-     *
-     * @return array of transformed attributes
-     */
-    public static function getRequestAttributes($attributes, array $nullableColumns = []) : array
-    {
-        return self::transformRequest($attributes, self::$mapping, [], $nullableColumns);
     }
 }

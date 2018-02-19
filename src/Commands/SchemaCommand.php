@@ -11,24 +11,13 @@ namespace RealPage\Generators\Commands;
 
 class SchemaCommand extends BaseCommand
 {
-    protected $signature = 'rp:schema {name : Name of the model.}';
+    protected $name = 'rp:schema';
 
     protected $description = 'Generates a Schema class for a RESTful resource';
 
     public function handle()
     {
-        $name = ucwords(camel_case($this->argument('name')));
-
-        $content = $this->getTemplate('schema')
-            ->with([
-                'model' => $name,
-                'resource' => strtolower($name)
-            ])
-            ->get();
-
-        $this->save($content, "./app/Schemas/{$name}/{$name}Schema.php");
-
-        $this->info("{$name}Schema generated !");
+        $args = parent::handle();
+        parent::writeToTemplate('schema', $args, '/src/Schemas', 'Schema');
     }
-
 }

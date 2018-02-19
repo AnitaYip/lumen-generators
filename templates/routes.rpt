@@ -2,10 +2,10 @@
 /**
  * Routes for resource {{model}}
  */
-use App\Http\Controllers\{{model}}\{{controller}};
+use App\Http\Controllers\{{dir}}\{{controller}};
 
 $app->group(['prefix' => '{{resource}}'], function ($app) {
-    $app->get('/', {{controller}}::class . '@index');
+    $app->get('/', {{controller}}::class . '@filterByCriteria');
     $app->get('/{id}', {{controller}}::class . '@find');
     $app->post('/', ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@create']);
     $app->put(
@@ -16,5 +16,5 @@ $app->group(['prefix' => '{{resource}}'], function ($app) {
         '/{id}',
         ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@patch']
     );
-    $app->delete('/{id}', {{controller}}::class . '@delete');
+    $app->delete('/{id}', ['middleware' => 'validator.{{resource}}', 'uses' => {{controller}}::class . '@delete']);
 });

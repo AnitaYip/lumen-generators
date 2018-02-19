@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\{{name}};
+namespace App\Models\{{model}};
 
 use RealPage\Lumen\database\Eloquent\Model\AbstractBaseModel;
 
 /**
- * Class {{name}} - Eloquent Model.
+ * Class {{model}} - Eloquent Model.
  *
- * @package App\Models\{{name}}
+ * @package App\Models\{{model}}
  */
-class {{name}} extends AbstractBaseModel
+class {{model}} extends AbstractBaseModel
 {
     /**
      * @var string

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories\{{model}};
+namespace App\Repositories\{{dir}};
 
-use App\Models\{{model}}\{{model}};
+use App\Models\{{dir}}\{{model}};
 use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Interface {{model}}RepositoryInterface - Defines CRUD operations on {{model}} entity.
  *
- * @package App\Repositories\{{model}}
+ * @package App\Repositories\{{dir}}
  */
 interface {{model}}RepositoryInterface
 {

@@ -3,8 +3,7 @@
 
 class ResourceCommand extends BaseCommand {
 
-    protected $signature = 'rp:resource
-        {name : Name of the resource.}';
+    protected $name = 'rp:resource';
 
     protected $description = 'Generates a model, controller, repository,
      schema (json-api), validator and routes for RESTful resource';
@@ -22,13 +21,10 @@ class ResourceCommand extends BaseCommand {
 
     public function handle()
     {
-        $resourceName = $this->argument('name');
-        $modelName = ucwords(camel_case($resourceName));
+        $arguments = parent::handle();
 
         foreach ($this->commands as $command) {
-            $this->call($command, [
-                'name' => $modelName
-            ]);
+            $this->call($command, $arguments);
         }
     }
 }
