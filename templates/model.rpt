@@ -3,6 +3,7 @@
 namespace App\Models\{{model}};
 
 use RealPage\Lumen\database\Eloquent\Model\AbstractBaseModel;
+use RealPage\EnterpriseServices\Models\Traits\AuditColumnsTrait;
 
 /**
  * Class {{model}} - Eloquent Model.
@@ -11,13 +12,52 @@ use RealPage\Lumen\database\Eloquent\Model\AbstractBaseModel;
  */
 class {{model}} extends AbstractBaseModel
 {
+    use AuditColumnsTrait;
+
     /**
      * @var string
      */
-    protected $table = '';
+    protected $table = '{{resource}}';
 
     /**
      * @var string
      */
     protected $primaryKey = '';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'createdat',
+        'modifiedat',
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            return self::setAuditColumns($model, true);
+        });
+
+        static::updating(function ($model) {
+            return self::setAuditColumns($model, false, true);
+        });
+    }
 }
