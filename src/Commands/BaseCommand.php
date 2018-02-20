@@ -2,7 +2,6 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use RealPage\EnterpriseServices\Helpers\StringFormat;
 use RealPage\Generators\Template\TemplateLoader;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -57,8 +56,8 @@ class BaseCommand extends Command {
                 'modelObj' => camel_case($args['name']),
                 'resource' => strtolower($args['name']),
                 'controller' => $args['name'] . 'Controller',
-                'staticModel' => strtoupper(StringFormat::toSnakeCase($args['name'])),
-                'functionName' => strtolower(StringFormat::toSnakeCase($args['name']))
+                'staticModel' => strtoupper(self::toSnakeCase($args['name'])),
+                'functionName' => strtolower(self::toSnakeCase($args['name']))
             ])
             ->get();
 
@@ -91,5 +90,34 @@ class BaseCommand extends Command {
         return [
             ['--f|force', null, InputOption::VALUE_OPTIONAL, 'To skip the prompting before deletion.', null],
         ];
+    }
+
+    /**
+     * Translates a camel case string into a string with underscores (e.g. firstName -&gt; first_name)
+     *
+     * @param    string   $str   String in camel case format
+     * @return   string   $str   Translated into underscore format
+     */
+    public static function toSnakeCase($str)
+    {
+        $str[0] = strtolower($str[0]);
+        $func = create_function('$c', 'return "_" . strtolower($c[1]);');
+        return preg_replace_callback('/([A-Z,0-9])/', $func, $str);
+    }
+
+    /**
+     * Translates a string with underscores into camel case (e.g. first_name -&gt; firstName)
+     *
+     * @param    string   $str                       String in underscore format
+     * @param    bool     $capitalise_first_char     If true, capitalise the first char in $str
+     * @return   string                              $str translated into camel caps
+     */
+    public static function toCamelCase($str, $capitalise_first_char = false)
+    {
+        if ($capitalise_first_char) {
+            $str[0] = strtoupper($str[0]);
+        }
+        $func = create_function('$c', 'return strtoupper($c[1]);');
+        return preg_replace_callback('/_([a-z,0-9])/', $func, $str);
     }
 }
