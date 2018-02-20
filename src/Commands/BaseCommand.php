@@ -57,7 +57,7 @@ class BaseCommand extends Command {
                 'resource' => strtolower($args['name']),
                 'controller' => $args['name'] . 'Controller',
                 'staticModel' => strtoupper(self::toSnakeCase($args['name'])),
-                'functionName' => strtolower(self::toSnakeCase($args['name']))
+                'functionModel' => strtolower(self::toSnakeCase($args['name']))
             ])
             ->get();
 

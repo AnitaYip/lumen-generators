@@ -39,6 +39,6 @@ class {{model}}Schema extends SchemaProvider
      */
     public function getAttributes($resource)
     {
-        return $this->transformResponse($resource, self::$mapping);
+        return self::getResponseAttributes($resource);
     }
 }
