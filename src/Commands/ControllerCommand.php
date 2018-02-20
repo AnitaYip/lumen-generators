@@ -1,6 +1,5 @@
 <?php namespace RealPage\Generators\Commands;
 
-
 class ControllerCommand extends BaseCommand {
 
     protected $name = 'rp:controller';

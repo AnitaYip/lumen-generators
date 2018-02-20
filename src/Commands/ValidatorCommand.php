@@ -8,7 +8,6 @@
 
 namespace RealPage\Generators\Commands;
 
-
 class ValidatorCommand extends BaseCommand
 {
     protected $name = 'rp:validator';

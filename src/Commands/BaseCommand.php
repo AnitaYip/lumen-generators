@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use RealPage\EnterpriseServices\Helpers\StringFormat;
 use RealPage\Generators\Template\TemplateLoader;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -55,7 +56,9 @@ class BaseCommand extends Command {
                 'dir'   => $args['dir'],
                 'modelObj' => camel_case($args['name']),
                 'resource' => strtolower($args['name']),
-                'controller' => $args['name'] . 'Controller'
+                'controller' => $args['name'] . 'Controller',
+                'staticModel' => strtoupper(StringFormat::toSnakeCase($args['name'])),
+                'functionName' => strtolower(StringFormat::toSnakeCase($args['name']))
             ])
             ->get();
 

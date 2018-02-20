@@ -1,0 +1,31 @@
+<?php
+
+use \Laravel\Lumen\Testing\DatabaseTransactions;
+
+class {{model}}ReadTest extends TestCase
+{
+    use DatabaseTransactions;
+    use {{model}}TestDataProvider;
+
+    /** @test */
+    public function get_a_{{functionModel}}_by_id_success()
+    {
+        ${{modelObj}} = $this->createTest{{model}}();
+        $this->get(
+            self::${{staticModel}}_URI_BASE . '/' . ${{modelObj}}->{{resource}}id,
+            $this->jsonApiHeaders
+        );
+        $this->assertResponseOk();
+        ${{modelObj}}Arr = $this->create{{model}}Array(${{modelObj}});
+        $this->seeJsonContains(${{modelObj}}Arr);
+        $this->seeHasHeaders();
+    }
+
+    /** @test */
+    public function get_a_{{functionModel}}_by_id_not_found_should_fail()
+    {
+        $this->get(self::${{staticModel}}_URI_BASE . '/0', $this->jsonApiHeaders);
+        $this->assertResponseStatus(404);
+        $this->seeHasHeaders();
+    }
+}

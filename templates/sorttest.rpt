@@ -1,0 +1,170 @@
+<?php
+
+use \Laravel\Lumen\Testing\DatabaseTransactions;
+
+class {{model}}SortTest extends TestCase
+{
+    use DatabaseTransactions;
+    use {{model}}TestDataProvider;
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_propertyid_asc_success()
+    {
+        $this->filterAndSort('propertyId');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_propertyid_desc_success()
+    {
+        $this->filterAndSort('propertyId', false);
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_unittype_asc_success()
+    {
+        $this->filterAndSort('unitType');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_unittype_desc_success()
+    {
+        $this->filterAndSort('unitType', false);
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_buildingnumber_asc_success()
+    {
+        $this->filterAndSort('buildingNumber');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_buildingnumber_desc_success()
+    {
+        $this->filterAndSort('buildingNumber', false);
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_floornumber_asc_success()
+    {
+        $this->filterAndSort('floorNumber');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_floornumber_desc_success()
+    {
+        $this->filterAndSort('floorNumber', false);
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_unitnumber_asc_success()
+    {
+        $this->filterAndSort('unitNumber');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_unitnumber_desc_success()
+    {
+        $this->filterAndSort('unitNumber', false);
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_squarefeet_asc_success()
+    {
+        $this->filterAndSort('squareFeet');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_squarefeet_desc_success()
+    {
+        $this->filterAndSort('squareFeet', false);
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_beds_asc_success()
+    {
+        $this->filterAndSort('beds');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_beds_desc_success()
+    {
+        $this->filterAndSort('beds', false);
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_baths_asc_success()
+    {
+        $this->filterAndSort('baths');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_baths_desc_success()
+    {
+        $this->filterAndSort('baths', false);
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_createdat_asc_success()
+    {
+        $this->filterAndSort('createdAt');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_createdat_desc_success()
+    {
+        $this->filterAndSort('createdAt', false);
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_modifiedat_asc_success()
+    {
+        $this->filterAndSort('modifiedAt');
+    }
+
+    /** @test */
+    public function sort_{{functionModel}}s_by_modifiedat_desc_success()
+    {
+        $this->filterAndSort('modifiedAt', false);
+    }
+
+    private function filterAndSort($orderByField, $asc = true)
+    {
+        ${{modelObj}}ModelArray = $this->createTest{{model}}(3)->all();
+        ${{modelObj}}Ids = array_column(${{modelObj}}ModelArray, '{{resource}}id');
+        $filteredIds = array_slice(${{modelObj}}Ids, 0, 3);
+        $orderBy = $orderByField;
+        $sortParam = null;
+        if ($asc){
+            $sortParam = $orderByField;
+        } else {
+            $sortParam = '-' . $orderByField;
+        }
+
+        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=' . implode(",", $filteredIds) . '&sort=' . $sortParam, $this->jsonApiHeaders);
+
+        $this->assertResponseOk();
+
+        $orderByData = array_column(${{modelObj}}ModelArray, strtolower($orderBy));
+        if ($asc) {
+            sort($orderByData);
+        } else {
+            rsort($orderByData);
+        }
+
+        $count = 1;
+        foreach(${{modelObj}}ModelArray as ${{modelObj}}) {
+            ${{modelObj}}Array = $this->create{{model}}Array(${{modelObj}});
+            $this->seeJsonContains(${{modelObj}}Array);
+
+            $count++;
+            if($count > 3) break;
+        }
+        $responseArr = (json_decode($this->response->getContent(), true))['data'];
+
+        $orderBy = explode(":", $orderByField);
+        for ($i = 0; $i < $count-1; $i++) {
+            $this->assertEquals($orderByData[$i], (count($orderBy) > 1 ? $responseArr[$i]['attributes'][$orderBy[0]][$orderBy[1]] : $responseArr[$i]['attributes'][$orderBy[0]]));
+        }
+        $this->seeHasHeaders();
+    }
+}

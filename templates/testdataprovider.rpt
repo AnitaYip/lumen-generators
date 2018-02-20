@@ -1,0 +1,74 @@
+<?php
+
+use App\Models\{{dir}}\{{model}};
+
+trait {{model}}TestDataProvider
+{
+    private static ${{staticModel}}_URI_BASE = "/{{resource}}";
+
+    private static ${{staticModel}}_SCHEMA_TYPE = '{{resource}}';
+
+    private static ${{staticModel}}_DB_TABLE = '{{resource}}';
+
+    private static ${{staticModel}}_DB_CONNECTION = '';
+
+    public function makeTest{{model}}($num = 1, $data = null)
+    {
+        if (isset($data)) {
+            return ($num > 1) ? factory({{model}}::class, $num)->make($data) : factory({{model}}::class)->make($data);
+        }
+        return ($num > 1) ? factory({{model}}::class, $num)->make() : factory({{model}}::class)->make();
+    }
+
+    public function createTest{{model}}($num = 1, $data = null)
+    {
+        if (isset($data)) {
+            return ($num > 1) ? factory({{model}}::class, $num)->create($data) : factory({{model}}::class)->create($data);
+        }
+        return ($num > 1) ? factory({{model}}::class, $num)->create() : factory({{model}}::class)->create();
+    }
+
+    public function create{{model}}Array(${{modelObj}}, $with{{model}}Id = true)
+    {
+        ${{modelObj}}Array = [
+
+            'createdBy'                 => ${{modelObj}}->createdby,
+            'modifiedBy'                => ${{modelObj}}->modifiedby
+        ];
+
+        if ($with{{model}}Id === true) {
+            ${{modelObj}}Array['{{modelObj}}Id'] = ${{modelObj}}->{{resource}}id;
+        }
+
+        return ${{modelObj}}Array;
+    }
+
+    public function create{{model}}DBArray(${{modelObj}}Array, $with{{model}}Id = true)
+    {
+        ${{modelObj}}DBArray = [
+
+        ];
+        if ($with{{model}}Id === true) {
+            ${{modelObj}}DBArray = array_add(
+                ${{modelObj}}DBArray,
+                '{{resource}}id',
+                ${{modelObj}}Array['{{modelObj}}Id']
+            );
+        }
+        return ${{modelObj}}DBArray;
+    }
+
+    public function update{{model}}(&${{modelObj}}Array)
+    {
+
+        ${{modelObj}}Id = ${{modelObj}}Array['{{modelObj}}Id'];
+
+        ${{modelObj}} = $this->makeTest{{model}}();
+        ${{modelObj}}NewArray = $this->create{{model}}Array(${{modelObj}});
+        foreach (${{modelObj}}Array as $key => $value)
+        {
+            ${{modelObj}}Array[$key] = ${{modelObj}}NewArray[$key];
+        }
+        ${{modelObj}}Array['{{modelObj}}Id'] = ${{modelObj}}Id;
+    }
+}

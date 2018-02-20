@@ -1,6 +1,5 @@
 <?php namespace RealPage\Generators\Commands;
 
-
 class ModelCommand extends BaseCommand {
 
 	protected $name = 'rp:model';

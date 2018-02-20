@@ -8,7 +8,6 @@
 
 namespace RealPage\Generators\Commands;
 
-
 class RepositoryCommand extends BaseCommand
 {
     protected $name = 'rp:repo';

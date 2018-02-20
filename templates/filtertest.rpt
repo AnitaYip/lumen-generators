@@ -1,0 +1,71 @@
+<?php
+
+use \Laravel\Lumen\Testing\DatabaseTransactions;
+
+class {{model}}FilterTest extends TestCase
+{
+    use DatabaseTransactions;
+    use {{model}}TestDataProvider;
+
+    /** @test */
+    public function get_all_{{functionModel}}s_without_filter_param_should_fail()
+    {
+        $this->get(self::${{staticModel}}_URI_BASE . '/', $this->jsonApiHeaders);
+        $this->assertResponseStatus(400);
+        $this->seeHasHeaders();
+    }
+
+    /** @test */
+    public function filter_{{functionModel}}s_success()
+    {
+        ${{modelObj}}s = $this->createTest{{model}}(3);
+        ${{modelObj}}ModelArray = ${{modelObj}}s->all();
+        ${{modelObj}}Ids = array_column(${{modelObj}}ModelArray, '{{resource}}id');
+        $filteredIds = array_slice(${{modelObj}}Ids, 0, 3);
+
+        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=' . implode(",", $filteredIds), $this->jsonApiHeaders);
+        $this->assertResponseOk();
+
+        $count = 1;
+        foreach(${{modelObj}}ModelArray as ${{modelObj}}) {
+            ${{modelObj}}Array = $this->create{{model}}Array(${{modelObj}});
+            $this->seeJsonContains(${{modelObj}}Array);
+            $count++;
+            if($count > 3) break;
+        }
+        $this->seeHasHeaders();
+    }
+
+    /** @test */
+    public function filter_{{functionModel}}s_partly_not_found_returns_success()
+    {
+        ${{modelObj}}s = $this->createTest{{model}}(3);
+        ${{modelObj}}ModelArray = ${{modelObj}}s->all();
+        ${{modelObj}}Ids = array_column(${{modelObj}}ModelArray, '{{resource}}id');
+        $filteredIds = array_slice(${{modelObj}}Ids, 0, 3);
+        $filteredIds[] = 0;
+
+        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=' . implode(",", $filteredIds), $this->jsonApiHeaders);
+        $this->assertResponseOk();
+
+        $count = 1;
+        foreach(${{modelObj}}ModelArray as ${{modelObj}}) {
+            ${{modelObj}}Arr = $this->create{{model}}Array(${{modelObj}});
+            $this->seeJsonContains(${{modelObj}}Arr);
+
+            $count++;
+            if($count > 3) break;
+        }
+        $this->seeHasHeaders();
+    }
+
+    /** @test */
+    public function filter_{{functionModel}}s_all_not_found_should_fail()
+    {
+        $filteredIds = [-1,-1000,];
+
+        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=' . implode(",", $filteredIds), $this->jsonApiHeaders);
+        $this->assertResponseStatus(404);
+        $this->seeHasHeaders();
+    }
+}

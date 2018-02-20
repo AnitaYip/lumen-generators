@@ -8,7 +8,6 @@
 
 namespace RealPage\Generators\Commands;
 
-
 class RepositoryInterfaceCommand extends BaseCommand
 {
     protected $name = 'rp:repointf';

@@ -1,6 +1,5 @@
 <?php namespace RealPage\Generators\Commands;
 
-
 class RouteCommand extends BaseCommand {
 
 	protected $name = 'rp:route';

@@ -1,6 +1,5 @@
 <?php namespace RealPage\Generators\Commands;
 
-
 class ResourceCommand extends BaseCommand {
 
     protected $name = 'rp:resource';
@@ -16,7 +15,8 @@ class ResourceCommand extends BaseCommand {
         'rp:repo',
         'rp:schema',
         'rp:validator',
-        'rp:route'
+        'rp:route',
+        'rp:tests'
     ];
 
     public function handle()

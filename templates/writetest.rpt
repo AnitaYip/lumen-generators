@@ -1,0 +1,135 @@
+<?php
+
+use \Laravel\Lumen\Testing\DatabaseTransactions;
+
+class {{model}}WriteTest extends TestCase
+{
+    use DatabaseTransactions;
+    use {{model}}TestDataProvider;
+    
+    /** @test */
+    public function create_a_{{functionModel}}_success()
+    {
+        ${{modelObj}} = $this->makeTest{{model}}();
+        ${{modelObj}}Array = $this->create{{model}}Array(${{modelObj}}, false);
+
+        $this->json(
+            'POST',
+            self::${{staticModel}}_URI_BASE,
+            $this->buildJsonApiPayload(self::${{staticModel}}_SCHEMA_TYPE, ${{modelObj}}Array),
+            $this->jsonApiHeaders
+        );
+        $this->assertResponseStatus(201);
+        $this->seeJsonContains(${{modelObj}}Array);
+        $this->seeInDatabase(
+            self::${{staticModel}}_DB_TABLE,
+            $this->create{{model}}DBArray(${{modelObj}}Array, false),
+            self::${{staticModel}}_DB_CONNECTION
+        );
+        $this->seeHasHeaders();
+    }
+
+    /** @test */
+    public function update_a_{{functionModel}}_by_id_success()
+    {
+        ${{modelObj}} = $this->createTest{{model}}();
+        ${{modelObj}}Array = $this->create{{model}}Array(${{modelObj}});
+        $this->update{{model}}(${{modelObj}}Array);
+
+        $this->json(
+            'PUT',
+            self::${{staticModel}}_URI_BASE . '/' . ${{modelObj}}->{{resource}}id,
+            $this->buildJsonApiPayload(self::${{staticModel}}_SCHEMA_TYPE, ${{modelObj}}Array),
+            $this->jsonApiHeaders
+        );
+        $this->assertResponseOk();
+        $this->unsetAuditFields(${{modelObj}}Array);
+        $this->seeJsonContains(${{modelObj}}Array);
+        $this->seeInDatabase(self::${{staticModel}}_DB_TABLE, $this->create{{model}}DBArray(${{modelObj}}Array), self::${{staticModel}}_DB_CONNECTION);
+        $this->seeHasHeaders();
+    }
+
+    /** @test */
+    public function update_a_{{functionModel}}_by_id_not_found_should_fail()
+    {
+        ${{modelObj}} = $this->createTest{{model}}();
+        ${{modelObj}}Array = $this->create{{model}}Array(${{modelObj}});
+
+        $this->json(
+            'PUT',
+            self::${{staticModel}}_URI_BASE . '/0',
+            $this->buildJsonApiPayload(self::${{staticModel}}_SCHEMA_TYPE, ${{modelObj}}Array),
+            $this->jsonApiHeaders
+        );
+        $this->assertResponseStatus(404);
+        $this->seeHasHeaders();
+    }
+
+    /** @test */
+    public function patch_a_{{functionModel}}_by_id_success()
+    {
+        ${{modelObj}} = $this->createTest{{model}}();
+        ${{modelObj}}Array = $this->create{{model}}Array(${{modelObj}});
+        $this->update{{model}}(${{modelObj}}Array);
+
+        $this->json(
+            'PATCH',
+            self::${{staticModel}}_URI_BASE . '/' . ${{modelObj}}->{{resource}}id,
+            $this->buildJsonApiPayload(self::${{staticModel}}_SCHEMA_TYPE, ${{modelObj}}Array),
+            $this->jsonApiHeaders
+        );
+        $this->assertResponseOk();
+        $this->unsetAuditFields(${{modelObj}}Array);
+        $this->seeJsonContains(${{modelObj}}Array);
+        $this->seeInDatabase(self::${{staticModel}}_DB_TABLE, $this->create{{model}}DBArray(${{modelObj}}Array), self::${{staticModel}}_DB_CONNECTION);
+        $this->seeHasHeaders();
+    }
+
+    /* @test */
+    public function patch_a_{{functionModel}}_by_id_not_found_should_fail()
+    {
+        ${{modelObj}} = $this->createTest{{model}}();
+        ${{modelObj}}Array = $this->create{{model}}Array(${{modelObj}});
+
+        $this->json(
+            'PATCH',
+            self::${{staticModel}}_URI_BASE . '/0',
+            $this->buildJsonApiPayload(self::${{staticModel}}_SCHEMA_TYPE, ${{modelObj}}Array),
+            $this->jsonApiHeaders
+        );
+        $this->assertResponseStatus(404);
+        $this->seeHasHeaders();
+    }
+
+    /** @test */
+    public function delete_a_{{functionModel}}_by_id_success()
+    {
+        ${{modelObj}} = $this->createTest{{model}}();
+        $this->delete(
+            self::${{staticModel}}_URI_BASE . '/' . ${{modelObj}}->{{resource}}id . '?modifiedBy=XYZ',
+            $this->jsonApiHeaders
+        );
+        $this->assertResponseStatus(204);
+
+        parent::seeIsSoftDeletedInDatabase(self::${{staticModel}}_DB_TABLE, ['{{resource}}id' => ${{modelObj}}->{{resource}}id], self::${{staticModel}}_DB_CONNECTION, 'deletedat');
+    }
+
+    /** @test */
+    public function delete_a_{{functionModel}}_by_id_without_modifiedby_should_fail()
+    {
+        ${{modelObj}} = $this->createTest{{model}}();
+        $this->delete(
+            self::${{staticModel}}_URI_BASE . '/' . ${{modelObj}}->{{resource}}id,
+            $this->jsonApiHeaders
+        );
+        $this->assertResponseStatus(400);
+    }
+
+    /** @test */
+    public function delete_a_{{functionModel}}_by_id_not_found_should_fail()
+    {
+        $this->delete(self::${{staticModel}}_URI_BASE . '/0?modifiedBy=XYZ', $this->jsonApiHeaders);
+        $this->assertResponseStatus(404);
+        $this->seeHasHeaders();
+    }
+}

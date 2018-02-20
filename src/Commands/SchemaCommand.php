@@ -8,7 +8,6 @@
 
 namespace RealPage\Generators\Commands;
 
-
 class SchemaCommand extends BaseCommand
 {
     protected $name = 'rp:schema';
