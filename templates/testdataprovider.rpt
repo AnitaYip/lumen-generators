@@ -60,7 +60,6 @@ trait {{model}}TestDataProvider
 
     public function update{{model}}(&${{modelObj}}Array)
     {
-
         ${{modelObj}}Id = ${{modelObj}}Array['{{modelObj}}Id'];
 
         ${{modelObj}} = $this->makeTest{{model}}();
