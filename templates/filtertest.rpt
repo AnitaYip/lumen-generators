@@ -23,7 +23,7 @@ class {{model}}FilterTest extends TestCase
         ${{modelObj}}Ids = array_column(${{modelObj}}ModelArray, '{{resource}}id');
         $filteredIds = array_slice(${{modelObj}}Ids, 0, 3);
 
-        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=' . implode(",", $filteredIds), $this->jsonApiHeaders);
+        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=in:' . implode(",", $filteredIds), $this->jsonApiHeaders);
         $this->assertResponseOk();
 
         $count = 1;
@@ -45,7 +45,7 @@ class {{model}}FilterTest extends TestCase
         $filteredIds = array_slice(${{modelObj}}Ids, 0, 3);
         $filteredIds[] = 0;
 
-        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=' . implode(",", $filteredIds), $this->jsonApiHeaders);
+        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=in:' . implode(",", $filteredIds), $this->jsonApiHeaders);
         $this->assertResponseOk();
 
         $count = 1;
@@ -64,7 +64,7 @@ class {{model}}FilterTest extends TestCase
     {
         $filteredIds = [-1,-1000,];
 
-        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=' . implode(",", $filteredIds), $this->jsonApiHeaders);
+        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=in:' . implode(",", $filteredIds), $this->jsonApiHeaders);
         $this->assertResponseStatus(404);
         $this->seeHasHeaders();
     }

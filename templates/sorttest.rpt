@@ -140,7 +140,7 @@ class {{model}}SortTest extends TestCase
             $sortParam = '-' . $orderByField;
         }
 
-        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=' . implode(",", $filteredIds) . '&sort=' . $sortParam, $this->jsonApiHeaders);
+        $this->get(self::${{staticModel}}_URI_BASE . '?filter[{{modelObj}}Id]=in:' . implode(",", $filteredIds) . '&sort=' . $sortParam, $this->jsonApiHeaders);
 
         $this->assertResponseOk();
 
