@@ -9,6 +9,6 @@ class RouteCommand extends BaseCommand {
     public function handle()
     {
         $args = parent::handle();
-        parent::writeToTemplate('routes', $args, '/src/Http/Rotues', 'Routes');
+        parent::writeToTemplate('routes', $args, '/src/Http/Routes', 'Routes');
     }
 }
