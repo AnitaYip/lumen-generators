@@ -2,7 +2,6 @@
 
 namespace App\Models\{{dir}};
 
-use RealPage\Lumen\database\Eloquent\Model\AbstractBaseModel;
 use RealPage\EnterpriseServices\Models\Traits\AuditColumnsTrait;
 
 /**
